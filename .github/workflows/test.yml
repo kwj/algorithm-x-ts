@@ -6,12 +6,12 @@ on:
   pull_request:
     branches: [$default-branch]
 
-permissions:
-  contents: read
-
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     steps:
       - name: setup repo
