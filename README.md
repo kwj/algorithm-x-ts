@@ -4,20 +4,6 @@ This TypeScript library implements Knuth's Algorithm X and Dancing Links[^1].
 
 > Note: It uses ECMAScript 2023 features.
 
-## Installation
-
-### For Node.js
-
-```sh
-npx jsr add @kwj/algorithm-x
-```
-
-### For Deno
-
-```sh
-deno add @kwj/algorithm-x
-```
-
 ## Example
 
 The following problem is taken from the Wikipedia page[^2].
