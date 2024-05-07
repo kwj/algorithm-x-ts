@@ -1,0 +1,32 @@
+name: Test
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: setup repo
+        uses: actions/checkout@v4
+
+      - name: setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: verify formatting
+        run: deno fmt --check
+
+      - name: run linter
+        run: deno lint
+
+      - name: run tests
+        run: deno test
