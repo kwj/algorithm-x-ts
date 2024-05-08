@@ -172,7 +172,8 @@ export class AlgorithmX {
     if (data.length < 1) {
       throw new Error("The row data must contain at least one element.");
     }
-    const lst = Array.from(new Set(data)).toSorted();
+    const lst = Array.from(new Set(data))
+      .toSorted((a: number, b: number) => a - b);
     if (lst[0] < 1 || lst.at(-1)! > this.#nCol) {
       throw new RangeError(`The index must be between 1 and ${this.#nCol}.`);
     }
