@@ -1,4 +1,4 @@
-import { assertEquals, assertThrows } from "jsr:@std/assert@^0.224.0";
+import { assertEquals, assertThrows } from "@std/assert";
 import { AlgorithmX } from "./algorithm_x.ts";
 
 // https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X#Example
