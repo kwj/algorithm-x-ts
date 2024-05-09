@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 2024-05-09
+
+No functional change.
+
 ## [0.2.0] - 2024-05-09
 
 - Add: Support for constraints that are covered at most once.
