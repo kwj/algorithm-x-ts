@@ -73,6 +73,8 @@ class Node {
   d: Node;
   /** The link to the column node of the relevant column. */
   c: Node;
+  /** The flag indicates the constraint of column node must be covered exactly once. (only used on column nodes) */
+  exactlyOnce: boolean;
 
   /** Create a new node. The initial value of links to nodes is itself. */
   // deno-fmt-ignore
@@ -80,6 +82,7 @@ class Node {
     this.tag = "";
     this.cnt = 0;
     this.l = this.r = this.u = this.d = this.c = this;
+    this.exactlyOnce = false;
   }
 }
 
@@ -111,10 +114,11 @@ export class AlgorithmX {
    *
    * @param cSize The number of columns.
    */
-  constructor(cSize: number) {
+  constructor(cSize: number, nExactlyOnce: number = Number.MAX_SAFE_INTEGER) {
     if (cSize < 1) {
       throw new RangeError("The number of columns must be at least 1.");
     }
+    nExactlyOnce = Math.min(nExactlyOnce, cSize);
     this.#cs = new Array(cSize + 1);
     this.#cs[0] = new Node();
     this.#cs[0].tag = "head_node";
@@ -125,6 +129,9 @@ export class AlgorithmX {
       this.#cs[idx].l = this.#cs[idx - 1];
       this.#cs[idx].r = this.#cs[0];
       this.#cs[idx - 1].r = this.#cs[idx];
+      if (idx <= nExactlyOnce) {
+        this.#cs[idx].exactlyOnce = true;
+      }
     }
     this.#cs[0].l = this.#cs[cSize];
     this.#head = this.#cs[0];
@@ -294,7 +301,7 @@ export class AlgorithmX {
    */
   solve(): string[][] {
     const _findMin = (n: Node, stop: Node, result: Node): Node => {
-      if (n === stop) {
+      if (n.exactlyOnce === false) {
         return result;
       }
       if (n.cnt < result.cnt) {
@@ -305,7 +312,7 @@ export class AlgorithmX {
     };
 
     const _solve = (acc: string[]): void => {
-      if (this.#head.r === this.#head) {
+      if (this.#head.r.exactlyOnce === false) {
         this.#answer.push(acc);
       } else {
         const colNode = _findMin(this.#head.r, this.#head, this.#head.r);
