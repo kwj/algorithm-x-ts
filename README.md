@@ -4,7 +4,7 @@ This TypeScript library implements Knuth's Algorithm X and Dancing Links[^1].
 
 > Note: It uses ECMAScript 2023 features.
 
-## Example
+## Basic usage
 
 The following problem is taken from the Wikipedia page[^2].
 
@@ -29,6 +29,16 @@ dlx.addData("E", [2, 3, 6, 7]);
 dlx.addData("F", [2, 7]);
 console.log(dlx.solve().map((x) => x.toSorted())); // [["B", "D", "F"]]
 ```
+
+## Advanced usage
+
+If you need not only covering exactly once but at most once, such as diagonal
+lines in the eight queens puzzle, you have to divide constraints into two
+groups.
+
+Place constraint columns to be covered exactly once on the left side of the
+matrix, and then create AlgorithmX object which second parameter is the number
+of these columns. For more information, see files in the `./example` folder.
 
 ## License
 
