@@ -2,8 +2,6 @@
  * This module contains functions to solve the exact cover problem.
  *
  * [ref.] https://arxiv.org/abs/cs/0011047
- *
- * @module
  */
 
 /**
@@ -50,13 +48,16 @@
  * head node:
  *   tag: head_node
  *   cnt: always 0 (don't be used)
+ *   exactlyOnce: false
  *
  * column nodes:
  *   tag: col_# (col_1, col_2, col_3, ...)
+ *   exactlyOnce: true or false
  *
  * other nodes:
  *   tag: value specified by addData()
  *   cnt: always 0 (don't be used)
+ *   exactlyOnce: false (don't be used)
  */
 class Node {
   /** The tag name of the node. */
