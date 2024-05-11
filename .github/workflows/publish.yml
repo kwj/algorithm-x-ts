@@ -20,11 +20,14 @@ jobs:
           ref: ${{ github.ref_name }}
 
       - name: get version information from jsr.json
-        run: echo "JSR_VERSION=$(jq -rM '.version' jsr.json)" >> "$GITHUB_OUTPUT"
+        id: vars
+        run: |
+          echo "JSR_VERSION=$(jq -rM '.version' jsr.json)" >> $GITHUB_OUTPUT
+          echo ${{ github.ref_name }} | sed -Ee 's#([0-9]+\.[0-9]+\.[0-9])$# TAG_VERSION=\1#' | cut -d ' ' -f 2 >> $GITHUB_OUTPUT
 
-      - name: get version information from the tag
-        run: echo ${{ github.ref_name }} | sed -Ee 's#.*[^0-9]+([0-9]+\.[0-9]+\.[0-9])$#TAG_VERSION=\1#' >> "$GITHUB_OUTPUT"
-
-      - name: publish a package to JSR if both versions are same
-        if: "$JSR_VERSION" == "$TAG_VERSION"
+      - name: if
+        env:
+          JSR_VERSION: ${{ steps.vars.outputs.JSR_VERSION }}
+          TAG_VERSION: ${{ steps.vars.outputs.TAG_VERSION }}
+        if: ${{ steps.vars.outputs.JSR_VERSION == steps.vars.outputs.TAG_VERSION }}
         run: npx jsr publish
