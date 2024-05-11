@@ -28,6 +28,33 @@ Deno.test("Example from Wikipedia (row format)", () => {
   assertEquals(actual, expected);
 });
 
+Deno.test("Four queens puzzle", () => {
+  const N = 4;
+  const dlx = new AlgorithmX(N * 2 + ((N * 2 - 1) - 2) * 2, N * 2);
+  dlx.addData("a1", [1, 5, 16]);
+  dlx.addData("a2", [1, 6, 9, 15]);
+  dlx.addData("a3", [1, 7, 10, 14]);
+  dlx.addData("a4", [1, 8, 11]);
+  dlx.addData("b1", [2, 5, 9, 17]);
+  dlx.addData("b2", [2, 6, 10, 16]);
+  dlx.addData("b3", [2, 7, 11, 15]);
+  dlx.addData("b4", [2, 8, 12, 14]);
+  dlx.addData("c1", [3, 5, 10, 18]);
+  dlx.addData("c2", [3, 6, 11, 17]);
+  dlx.addData("c3", [3, 7, 12, 16]);
+  dlx.addData("c4", [3, 8, 13, 15]);
+  dlx.addData("d1", [4, 5, 11]);
+  dlx.addData("d2", [4, 6, 12, 18]);
+  dlx.addData("d3", [4, 7, 13, 17]);
+  dlx.addData("d4", [4, 8, 16]);
+  const actual = dlx.solve().map((x) => x.toSorted());
+  const expected: string[][] = [
+    ["a2", "b4", "c1", "d3"],
+    ["a3", "b1", "c4", "d2"],
+  ];
+  assertEquals(actual, expected);
+});
+
 Deno.test("No solution (1)", () => {
   const dlx = new AlgorithmX(7);
   dlx.addData("A", [1, 4, 7]);
