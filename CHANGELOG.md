@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.2] - 2024-05-10
+
+- Add: Add a sample program (sudoku)
+- Add: Add a workflow for publish
+
 ## [0.2.1] - 2024-05-09
 
 No functional change.
