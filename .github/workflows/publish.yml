@@ -19,11 +19,11 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: get version information from jsr.json
+      - name: get version information
         id: vars
         run: |
           echo "JSR_VERSION=$(jq -rM '.version' jsr.json)" >> $GITHUB_OUTPUT
-          echo ${{ github.ref_name }} | sed -Ee 's#([0-9]+\.[0-9]+\.[0-9])$# TAG_VERSION=\1#' | cut -d ' ' -f 2 >> $GITHUB_OUTPUT
+          echo ${{ github.ref_name }} | perl -ne '$_ =~ /((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$/; printf("TAG_VERSION=$1");' >> $GITHUB_OUTPUT
 
       - name: publish to JSR
         env:
