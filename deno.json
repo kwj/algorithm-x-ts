@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@kwj/algorithm-x": "jsr:@kwj/algorithm-x@^0.2.1",
+    "@kwj/algorithm-x": "jsr:@kwj/algorithm-x@^0.3.0",
     "@std/assert": "jsr:@std/assert@^0.225.1"
   }
 }
