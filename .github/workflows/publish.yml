@@ -29,8 +29,5 @@ jobs:
           echo ${{ github.ref_name }} | perl -ne '$_ =~ /((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$/; printf("TAG_VERSION=$1");' >> $GITHUB_OUTPUT
 
       - name: publish to JSR
-        env:
-          JSR_VERSION: ${{ steps.vars.outputs.JSR_VERSION }}
-          TAG_VERSION: ${{ steps.vars.outputs.TAG_VERSION }}
         if: ${{ steps.vars.outputs.JSR_VERSION == steps.vars.outputs.TAG_VERSION }}
         run: npx jsr publish --config $CONFIG_FILE
