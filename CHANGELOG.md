@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2024-05-12
+
+- Fix: Remove unnecessary environment variables [publish.yml]
+- Add: New getConstraintsMatrix() method for debug
+
 ## [0.2.3] - 2024-05-12
 
 - Fix: Use a suggested regular expression [publish.yml]

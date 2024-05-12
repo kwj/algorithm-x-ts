@@ -51,7 +51,7 @@
  *   exactlyOnce: false
  *
  * column nodes:
- *   tag: col_# (col_1, col_2, col_3, ...)
+ *   tag: string of column number (1, 2, 3, ...)
  *   exactlyOnce: true or false
  *
  * other nodes:
@@ -106,7 +106,7 @@ export class AlgorithmX {
   /** The number of column nodes. */
   #nCol: number;
   /** The collection of tag name (key) and left-most node (value). */
-  #tags: Map<string, Node>;
+  #tagMap: Map<string, Node>;
   /** The result of solver execution. */
   #answer: string[][];
 
@@ -126,7 +126,7 @@ export class AlgorithmX {
     this.#cs[0].cnt = Number.MAX_SAFE_INTEGER; // sentinel
     for (let idx = 1; idx < cSize + 1; idx++) {
       this.#cs[idx] = new Node();
-      this.#cs[idx].tag = "col_" + String(idx);
+      this.#cs[idx].tag = String(idx);
       this.#cs[idx].l = this.#cs[idx - 1];
       this.#cs[idx].r = this.#cs[0];
       this.#cs[idx - 1].r = this.#cs[idx];
@@ -137,7 +137,7 @@ export class AlgorithmX {
     this.#cs[0].l = this.#cs[cSize];
     this.#head = this.#cs[0];
     this.#nCol = cSize;
-    this.#tags = new Map<string, Node>();
+    this.#tagMap = new Map<string, Node>();
     this.#answer = [];
   }
 
@@ -174,7 +174,7 @@ export class AlgorithmX {
       }
     };
 
-    if (this.#tags.has(tag) === true) {
+    if (this.#tagMap.has(tag) === true) {
       throw new Error("The specified tag already exists.");
     }
     if (data.length < 1) {
@@ -189,7 +189,7 @@ export class AlgorithmX {
     if (head !== undefined) {
       tail!.r = head!;
       head!.l = tail!;
-      this.#tags.set(tag, head!);
+      this.#tagMap.set(tag, head!);
     }
   }
 
@@ -254,15 +254,15 @@ export class AlgorithmX {
       n.u = n.d = n.c = n;
     };
 
-    if (this.#tags.has(tag) === false) {
+    if (this.#tagMap.has(tag) === false) {
       // do nothing
       return;
     }
 
-    const n = this.#tags.get(tag)!;
+    const n = this.#tagMap.get(tag)!;
     _delete(n);
     this.#follow(n, _delete, Direction.Right);
-    this.#tags.delete(tag);
+    this.#tagMap.delete(tag);
   }
 
   #dlxCover(colNode: Node): void {
@@ -337,5 +337,30 @@ export class AlgorithmX {
     }
     _solve([]);
     return this.#answer;
+  }
+
+  /**
+   * Get the constraints matrix
+   *
+   * @returns The constraints matrix object
+   */
+  getConstraintsMatrix(): { tag: string; data: number[] }[] {
+    const result: {
+      tag: string;
+      data: number[];
+    }[] = [];
+    const aux = (n: Node, tag: string, _m: Map<string, Node>): void => {
+      const lst: number[] = Array(this.#nCol).fill(0);
+      const _setIndex = (n: Node): void => {
+        lst[Number(n.c.tag) - 1] = 1;
+      };
+
+      _setIndex(n);
+      this.#follow(n, _setIndex, Direction.Right);
+      result.push({ tag: tag, data: lst });
+    };
+
+    this.#tagMap.forEach(aux);
+    return result;
   }
 }
