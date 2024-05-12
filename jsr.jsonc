@@ -1,3 +1,4 @@
+// If we change the minor or major version, the `deno.json` file must also be updated.
 {
   "name": "@kwj/algorithm-x",
   "version": "0.3.0",
