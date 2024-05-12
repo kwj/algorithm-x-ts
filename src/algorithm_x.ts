@@ -301,14 +301,14 @@ export class AlgorithmX {
    * @returns The array of solutions.
    */
   solve(): string[][] {
-    const _findMin = (n: Node, stop: Node, result: Node): Node => {
+    const _findMin = (n: Node, result: Node): Node => {
       if (n.exactlyOnce === false) {
         return result;
       }
       if (n.cnt < result.cnt) {
-        return _findMin(n.r, stop, n);
+        return _findMin(n.r, n);
       } else {
-        return _findMin(n.r, stop, result);
+        return _findMin(n.r, result);
       }
     };
 
@@ -316,7 +316,7 @@ export class AlgorithmX {
       if (this.#head.r.exactlyOnce === false) {
         this.#answer.push(acc);
       } else {
-        const colNode = _findMin(this.#head.r, this.#head, this.#head.r);
+        const colNode = _findMin(this.#head.r, this.#head.r);
 
         if (colNode.cnt > 0) {
           const _iter = (n: Node) => {
