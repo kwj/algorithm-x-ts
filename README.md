@@ -20,7 +20,7 @@ The following problem is taken from the Wikipedia page[^2].
 ```typescript
 import { AlgorithmX } from "@kwj/algorithm-x";
 
-const dlx = new AlgorithmX(7);
+const dlx = new AlgorithmX(7); // [1, 2, 3, 4, 5, 6, 7].length
 dlx.addData("A", [1, 4, 7]);
 dlx.addData("B", [1, 4]);
 dlx.addData("C", [4, 5, 7]);
