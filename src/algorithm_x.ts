@@ -1,30 +1,5 @@
 /**
  * Data structure overview:
- *            :           :         :                  :
- *            |           |         |                  |
- *           u|          u|        u|                 u|
- *     +-----------r+ +------r+ +------r+ +-    -+ +------r+
- *  <--->'head_node'<->  '1'  <->  '2'  <-> .... <->  'n' <--->
- *     +-l----------+ +l------+ +l------+ +-    -+ +l------+
- *            |d          |d        |d                 |d
- *            |           |         |                  |
- *            |          u| r      u| r                |
- *  <------------------> node <--> node <----....------------->
- *            |         l |d      l |d                 |
- *            |           |         |                  |
- *            |           |        u| r               u| r
- *  <----------------------------> node <----....---> node <-->
- *            |           |       l |d               l |d
- *            |           |         |                  |
- *            :           :         :                  :
- *
- *               [c]olumn
- *                  |                 l : node
- *             [u]p :                 r : node
- *                | |                 u : node
- *    [l]eft <-- node --> [r]ight     d : node
- *                |                   c : node
- *              [d]own
  *
  *    #head ---->
  *              |
@@ -33,8 +8,33 @@
  *         +-------------+--------+---------+--    -+---------+
  *      #cs      [0]         [1]      [2]               [n]
  *            head node  | <--        column nodes        --> |
- *
  *    #nCol = n
+ *
+ *            :            :         :                  :
+ *            |            |         |                  |
+ *           u|           u|        u|                 u|
+ *     +------------r+ +------r+ +------r+ +-    -+ +------r+
+ *  <--->'head_node'<---> '1' <---> '2' <---> .. <---> 'n' <--->
+ *     +l------------+ +l------+ +l------+ +-    -+ +l------+
+ *            |d           |d        |d                 |d
+ *            |            |         |                  |
+ *            |           u| r      u| r                |
+ *  <-------------------> node <--> node <----....------------->
+ *            |          l |d      l |d                 |
+ *            |            |         |                  |
+ *            |            |        u| r               u| r
+ *  <-----------------------------> node <----....---> node <-->
+ *            |            |       l |d               l |d
+ *            |            |         |                  |
+ *            :            :         :                  :
+ *
+ *               [c]olumn
+ *                  |                 l : node
+ *             [u]p :                 r : node
+ *                | |                 u : node
+ *    [l]eft <-- node --> [r]ight     d : node
+ *                |                   c : node
+ *              [d]own
  */
 
 /**
@@ -47,6 +47,7 @@
  *
  * column nodes:
  *   tag: string of column number (1, 2, 3, ...)
+ *   cnt: number of nodes which belong to this column
  *   exactlyOnce: true or false
  *
  * other nodes:
@@ -55,9 +56,9 @@
  *   exactlyOnce: false (don't be used)
  */
 class Node {
-  /** The tag name of the node. */
+  /** The name of node. */
   tag: string;
-  /** The number of nodes belonging to the column. (column nodes only) */
+  /** The number of nodes which belong to this column. (column nodes only) */
   cnt: number;
   /** The link to the left neighbor node. */
   l: Node;
@@ -344,6 +345,7 @@ export class AlgorithmX {
       tag: string;
       data: number[];
     }[] = [];
+
     const aux = (n: Node, tag: string, _m: Map<string, Node>): void => {
       const lst: number[] = Array(this.#nCol).fill(0);
       const _setIndex = (n: Node): void => {
