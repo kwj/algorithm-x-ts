@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.2] - 2024-##-##
+
+- Remove unnecessary code
+
 ## [0.3.1] - 2024-05-13
 
 - Update comments.

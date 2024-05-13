@@ -43,7 +43,7 @@
  * head node:
  *   tag: head_node
  *   cnt: always 0 (don't be used)
- *   exactlyOnce: false
+ *   exactlyOnce: false (used as a sentinel)
  *
  * column nodes:
  *   tag: string of column number (1, 2, 3, ...)
@@ -119,7 +119,6 @@ export class AlgorithmX {
     this.#cs = new Array(cSize + 1);
     this.#cs[0] = new Node();
     this.#cs[0].tag = "head_node";
-    this.#cs[0].cnt = Number.MAX_SAFE_INTEGER; // sentinel
     for (let idx = 1; idx < cSize + 1; idx++) {
       this.#cs[idx] = new Node();
       this.#cs[idx].tag = String(idx);
