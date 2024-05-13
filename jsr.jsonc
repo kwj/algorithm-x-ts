@@ -1,7 +1,14 @@
-// If we change the minor or major version, the `deno.json` file must also be updated.
 {
   "name": "@kwj/algorithm-x",
   "version": "0.3.0",
-  "exports": "./src/mod.ts"
+  "exports": "./src/mod.ts",
+  "publish": {
+    "include": [
+      "CHANGELOG.md",
+      "LICENSE",
+      "README.md",
+      "src/**/*.ts",
+      "example/**/*.ts"
+    ]
   }
 }
