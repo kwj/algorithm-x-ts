@@ -1,10 +1,4 @@
 /**
- * This module contains functions to solve the exact cover problem.
- *
- * [ref.] https://arxiv.org/abs/cs/0011047
- */
-
-/**
  * Data structure overview:
  *            :           :         :                  :
  *            |           |         |                  |
@@ -88,7 +82,7 @@ class Node {
   }
 }
 
-/** Direction to track neighbor node at cover/uncover. */
+/** Direction to follow the next node. */
 enum Direction {
   Left,
   Right,
