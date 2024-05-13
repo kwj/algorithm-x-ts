@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  CONFIG_FILE: jsr.jsonc
+  CONFIG_FILE: jsr.json
 
 jobs:
   publish:
