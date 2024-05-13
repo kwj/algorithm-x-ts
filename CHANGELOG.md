@@ -1,9 +1,10 @@
 # Changelog
 
-## [0.3.1] - 2024-##-##
+## [0.3.1] - 2024-05-13
 
 - Update comments.
-- Rename `jsr.json` to `jsr.jsonc`.
+- Move 'mod.ts' to the './src' folder.
+- Use filter in the configuration file.
 
 ## [0.3.0] - 2024-05-12
 
