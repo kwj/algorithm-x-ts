@@ -7,7 +7,6 @@
       "CHANGELOG.md",
       "LICENSE",
       "README.md",
-      "deno.json",
       "jsr.json",
       "src/",
       "example/"

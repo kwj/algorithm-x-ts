@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.3] - 2024-##-##
+
+- Move `deno.json` to the `./src` folder
+
 ## [0.3.2] - 2024-05-14
 
 - Remove unnecessary code.
