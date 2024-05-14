@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@kwj/algorithm-x": "jsr:@kwj/algorithm-x@^0.3.0"
+  }
+}

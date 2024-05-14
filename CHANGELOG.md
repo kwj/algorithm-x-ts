@@ -4,11 +4,12 @@
 
 - Remove unnecessary code.
 - Tweak codes.
+- Add `deno.json` to be published files.
 
 ## [0.3.1] - 2024-05-13
 
 - Update comments.
-- Move 'mod.ts' to the './src' folder.
+- Move `mod.ts` to the `./src` folder.
 - Use filter in the configuration file.
 
 ## [0.3.0] - 2024-05-12
