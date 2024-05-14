@@ -2,7 +2,8 @@
 
 ## [0.3.2] - 2024-##-##
 
-- Remove unnecessary code
+- Remove unnecessary code.
+- Tweak codes.
 
 ## [0.3.1] - 2024-05-13
 

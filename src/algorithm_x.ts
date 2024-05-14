@@ -152,20 +152,20 @@ export class AlgorithmX {
         return { head: fst, tail: prev };
       }
       const idx = lst[0];
-      const cell = new Node();
-      cell.tag = tag;
-      cell.u = this.#cs[idx].u;
-      cell.u.d = cell;
-      cell.d = this.#cs[idx];
-      cell.d.u = cell;
-      cell.c = this.#cs[idx];
+      const n = new Node();
+      n.tag = tag;
+      n.u = this.#cs[idx].u;
+      n.u.d = n;
+      n.d = this.#cs[idx];
+      n.d.u = n;
+      n.c = this.#cs[idx];
       this.#cs[idx].cnt += 1;
       if (prev === undefined) {
-        return hookNode(lst.slice(1), cell, cell);
+        return hookNode(lst.slice(1), n, n);
       } else {
-        prev.r = cell;
-        cell.l = prev;
-        return hookNode(lst.slice(1), fst, cell);
+        prev.r = n;
+        n.l = prev;
+        return hookNode(lst.slice(1), fst, n);
       }
     };
 
