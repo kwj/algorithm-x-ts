@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.2] - 2024-##-##
+## [0.3.2] - 2024-05-14
 
 - Remove unnecessary code.
 - Tweak codes.
