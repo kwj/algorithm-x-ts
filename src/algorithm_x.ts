@@ -56,21 +56,18 @@
  *   exactlyOnce: false (don't be used)
  */
 class Node {
-  /** The name of node. */
+  /** Name of node. */
   tag: string;
-  /** The number of nodes which belong to this column. (column nodes only) */
+  /** Number of nodes which belong to this column. (column nodes only) */
   cnt: number;
-  /** The link to the left neighbor node. */
+  /** Links to adjacent nodes on the left, right, up and down. */
   l: Node;
-  /** The link to the right neighbor node. */
   r: Node;
-  /** The link to the up neighbor node. */
   u: Node;
-  /** The link to the down neighbor node. */
   d: Node;
-  /** The link to the column node of the relevant column. */
+  /** Link to the column node to which this node belongs. */
   c: Node;
-  /** The flag indicates the constraint of column node must be covered exactly once. (only used on column nodes) */
+  /** This flag indicates the constraint of column node must be covered exactly once. (only used on column nodes) */
   exactlyOnce: boolean;
 
   /** Create a new node. The initial value of links to nodes is itself. */

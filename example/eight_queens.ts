@@ -51,6 +51,8 @@
  * ..
  * h7    0  0 ..  1    0  0 ..  0 |  0   0  ..   1     0   0  ..  0   0   1  ..  0
  * h8    0  0 ..  1    0  0 ..  1 |  0   0  ..   0     0   0  ..  0   1   0  ..  0
+ *
+ * For eight queens puzzle, we create an AlgorithmX object with `new AlgorithmX(16 + 26, 16)`.
  */
 
 import { AlgorithmX } from "@kwj/algorithm-x";
