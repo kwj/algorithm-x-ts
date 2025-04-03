@@ -24,7 +24,7 @@ jobs:
           deno-version: v2.x
 
       - name: verify formatting
-        run: deno fmt --check
+        run: deno fmt --check ./src ./example
 
       - name: run linter
         run: deno lint
