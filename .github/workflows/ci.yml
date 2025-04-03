@@ -29,5 +29,8 @@ jobs:
       - name: run linter
         run: deno lint
 
+      - name: add assert module
+        run: deno add jsr:@std/assert
+
       - name: run tests
         run: deno test
