@@ -1,8 +1,10 @@
 # Changelog
 
-## [0.3.3] - 2024-##-##
+## [0.3.3] - 2025-04-03
 
-- Move `deno.json` to the `./src` folder
+- Move `deno.json` to the `./src` folder.
+- Avoid using enums.
+- Use jsr:@std/assert@1 for test program.
 - Update comments.
 
 ## [0.3.2] - 2024-05-14
