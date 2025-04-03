@@ -81,12 +81,14 @@ class Node {
 }
 
 /** Direction to follow the next node. */
-enum Direction {
-  Left,
-  Right,
-  Up,
-  Down,
-}
+const DIRECTIONS = {
+  Left: 0,
+  Right: 1,
+  Up: 2,
+  Down: 3,
+} as const;
+
+type Direction = typeof DIRECTIONS[keyof typeof DIRECTIONS];
 
 /**
  * A class to represent a solver of Algorithm X.
@@ -172,8 +174,9 @@ export class AlgorithmX {
     if (data.length < 1) {
       throw new Error("The row data must contain at least one element.");
     }
-    const lst = Array.from(new Set(data))
-      .toSorted((a: number, b: number) => a - b);
+    const lst = Array.from(new Set(data)).toSorted((a: number, b: number) =>
+      a - b
+    );
     if (lst[0] < 1 || lst.at(-1)! > this.#nCol) {
       throw new RangeError(`The index must be between 1 and ${this.#nCol}.`);
     }
@@ -210,13 +213,13 @@ export class AlgorithmX {
   #follow(n: Node, fn: (a: Node) => void, dir: Direction): void {
     const _next = (n: Node): Node => {
       switch (dir) {
-        case Direction.Left:
+        case DIRECTIONS.Left:
           return n.l;
-        case Direction.Right:
+        case DIRECTIONS.Right:
           return n.r;
-        case Direction.Up:
+        case DIRECTIONS.Up:
           return n.u;
-        case Direction.Down:
+        case DIRECTIONS.Down:
           return n.d;
       }
     };
@@ -253,7 +256,7 @@ export class AlgorithmX {
 
     const n = this.#tagMap.get(tag)!;
     _delete(n);
-    this.#follow(n, _delete, Direction.Right);
+    this.#follow(n, _delete, DIRECTIONS.Right);
     this.#tagMap.delete(tag);
   }
 
@@ -265,11 +268,11 @@ export class AlgorithmX {
     };
 
     const _coverRow = (n: Node): void =>
-      this.#follow(n, _cover, Direction.Right);
+      this.#follow(n, _cover, DIRECTIONS.Right);
 
     colNode.r.l = colNode.l;
     colNode.l.r = colNode.r;
-    this.#follow(colNode, _coverRow, Direction.Down);
+    this.#follow(colNode, _coverRow, DIRECTIONS.Down);
   }
 
   #dlxUncover(colNode: Node): void {
@@ -280,9 +283,9 @@ export class AlgorithmX {
     };
 
     const _uncoverRow = (n: Node): void =>
-      this.#follow(n, _uncover, Direction.Left);
+      this.#follow(n, _uncover, DIRECTIONS.Left);
 
-    this.#follow(colNode, _uncoverRow, Direction.Up);
+    this.#follow(colNode, _uncoverRow, DIRECTIONS.Up);
     colNode.r.l = colNode;
     colNode.l.r = colNode;
   }
@@ -312,13 +315,13 @@ export class AlgorithmX {
 
         if (colNode.cnt > 0) {
           const _iter = (n: Node) => {
-            this.#follow(n, (x) => this.#dlxCover(x.c), Direction.Right);
+            this.#follow(n, (x) => this.#dlxCover(x.c), DIRECTIONS.Right);
             _solve(acc.concat([n.tag]));
-            this.#follow(n, (x) => this.#dlxUncover(x.c), Direction.Left);
+            this.#follow(n, (x) => this.#dlxUncover(x.c), DIRECTIONS.Left);
           };
 
           this.#dlxCover(colNode);
-          this.#follow(colNode, _iter, Direction.Down);
+          this.#follow(colNode, _iter, DIRECTIONS.Down);
           this.#dlxUncover(colNode);
         }
       }
@@ -349,7 +352,7 @@ export class AlgorithmX {
       };
 
       _setIndex(n);
-      this.#follow(n, _setIndex, Direction.Right);
+      this.#follow(n, _setIndex, DIRECTIONS.Right);
       result.push({ tag: tag, data: lst });
     };
 
